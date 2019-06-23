@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">appTurista</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_lugares">Lugares</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="form_username">Correo electrónico</string>
+    <string name="form_password">Contraseña</string>
+    <string name="form_login">Entrar</string>
+    <string name="nav_visita">Iniciar sesión</string>
+    <string name="form_signup">Nuevo usuario</string>
+    <string name="form_firstName">Primer nombre</string>
+    <string name="form_middleName">Segundo nombre</string>
+    <string name="form_lastName">Apellidos</string>
+    <string name="form_birthDate">Fecha de nacimiento</string>
+    <string name="btn_signup">Aceptar</string>
+    <string name="log_error_occurred">Error al autenticar</string>
+    <string name="web_client_id">Agrega tus credenciales</string>
+</resources>

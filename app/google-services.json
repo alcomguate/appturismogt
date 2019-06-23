@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "294356885091",
+    "firebase_url": "https://turismogt-df303.firebaseio.com",
+    "project_id": "turismogt-df303",
+    "storage_bucket": "turismogt-df303.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294356885091:android:81b1521e9144ed96",
+        "android_client_info": {
+          "package_name": "com.udeo.jvidaurre.appturista"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294356885091-a69chv92r55s3qlfpprkm85jqgjciou5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.udeo.jvidaurre.appturista",
+            "certificate_hash": "6609ff6915bb72979185449b0caf809818773b0e"
+          }
+        },
+        {
+          "client_id": "294356885091-4ol65tov6fin1fn97t7pfepgrtqh5004.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7W17ZpK-MQxLuBeSW0AwGEdksKdod_R0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294356885091-4ol65tov6fin1fn97t7pfepgrtqh5004.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
