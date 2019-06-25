@@ -19,6 +19,10 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
+    <!-- CADENAS PARA AUTENTICACION CON FACEBOOK -->
+    <string name="facebook_app_id">1292035180973082</string>
+    <string name="fb_login_protocol_scheme">fb1292035180973082</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="form_username">Correo electrónico</string>
@@ -33,4 +37,17 @@
     <string name="btn_signup">Aceptar</string>
     <string name="log_error_occurred">Error al autenticar</string>
     <string name="web_client_id">Agrega tus credenciales</string>
+    <string name="title_activity_login">Iniciar sesion</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="cancel_login">Inicio de sesión cancelado</string>
+    <string name="error_login">Error en inicio de sesión</string>
+    <string name="action_logout">Cerrar sesión</string>
+    <string name="firebase_error_login">Error en autenticación con firebase</string>
 </resources>
