@@ -82,19 +82,6 @@ public class MainActivity extends AppCompatActivity
 
         navigationView.setCheckedItem(R.id.nav_Visita);
 
-        Button btnRegistro = (Button)findViewById(R.id.btn_signup);
-        btnRegistro.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                crearUsuario(view);
-            }
-        });
-
-        mSignInButton = (SignInButton) findViewById(R.id.login_with_google);
-        mSignInButton.setSize(SignInButton.SIZE_WIDE);
-
-
         configureSignIn();
 
         mAuth = com.google.firebase.auth.FirebaseAuth.getInstance();
@@ -114,13 +101,6 @@ public class MainActivity extends AppCompatActivity
             }
         };
 
-        mSignInButton.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                 autenticate(view);
-            }
-        });
 
         if(AccessToken.getCurrentAccessToken() == null){
             goLoginActivity();
@@ -133,18 +113,6 @@ public class MainActivity extends AppCompatActivity
         startActivity(intent);
     }
 
-    private void autenticate(View view) {
-        Utils utils = new Utils(this);
-        int id = view.getId();
-
-        if (id == R.id.login_with_google){
-            if (utils.isNetworkAvailable()){
-                signIn();
-            }else {
-                Toast.makeText(MainActivity.this, "Oops! no internet connection!", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
 
     @Override
     public void onBackPressed() {
