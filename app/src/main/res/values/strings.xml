@@ -50,4 +50,9 @@
     <string name="error_login">Error en inicio de sesión</string>
     <string name="action_logout">Cerrar sesión</string>
     <string name="firebase_error_login">Error en autenticación con firebase</string>
+    <string name="form_verlugar">Sugerencias</string>
+    <string name="nombreLugar">Nombre</string>
+    <string name="departamento">Departamento</string>
+    <string name="resena">Reseña</string>
+    <string name="titulo_reseña">Cuentanos sobre el lugar que visitasté</string>
 </resources>
