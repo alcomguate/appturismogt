@@ -7,61 +7,54 @@
     android:orientation="vertical"
     tools:context=".RegistroActivity">
 
-    <EditText
-        android:id="@+id/userName"
+    <com.google.android.material.textfield.TextInputEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/form_username"
-        android:inputType="textEmailAddress" />
+        android:text="@string/titulo_reseña"/>
 
     <EditText
-        android:id="@+id/firstName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/form_firstName"
-        android:inputType="textNoSuggestions" />
+        android:id="@+id/frm_nombreLugar"
+        android:singleLine="false"
+        android:inputType="text"
+        android:hint="@string/nombreLugar"
+        />
 
     <EditText
-        android:id="@+id/middleName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/form_middleName"
-        android:inputType="textNoSuggestions" />
+        android:id="@+id/frm_departamento"
+        android:singleLine="false"
+        android:inputType="text"
+        android:hint="@string/departamento"
+        />
 
     <EditText
-        android:id="@+id/lastName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/form_lastName"
-        android:inputType="textNoSuggestions" />
+        android:id="@+id/frm_reseña"
+        android:singleLine="false"
+        android:inputType="text"
+        android:hint="@string/resena"
+        />
 
 
-    <EditText
-        android:id="@+id/birthDate"
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:focusable="false"
-        android:inputType="date"
-        android:maxLines="1"
-        android:hint="@string/form_birthDate"/>
+        android:src="@android:drawable/ic_menu_camera"
+        android:onClick="openCamera"/>
 
-    <EditText
-        android:id="@+id/new_password"
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/form_password"
-        android:inputType="textPassword" />
+        android:id="@+id/img_preview"/>
     <Button
         android:id="@+id/btn_signupok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_signup"
-        android:onClick="crearUsuario"/>
+        android:text="@string/btn_signup"/>
 
 </LinearLayout>

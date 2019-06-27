@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void registrarVisita(View view){
-        Intent intent = new Intent(this, VisitaActivity.class);
+        Intent intent = new Intent(this, RegistroActivity.class);
         startActivity(intent);
     }
 
@@ -335,4 +335,6 @@ public class MainActivity extends AppCompatActivity
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+
 }

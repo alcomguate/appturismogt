@@ -1,17 +1,28 @@
 package com.udeo.jvidaurre.appturista;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.DialogFragment;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -22,6 +33,7 @@ import com.udeo.jvidaurre.appturista.R;
 import com.udeo.jvidaurre.appturista.activity.DatePickerFragment;
 import com.udeo.jvidaurre.appturista.dto.Usuario;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.UUID;
 
@@ -29,7 +41,12 @@ import static android.app.PendingIntent.getActivity;
 
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText etBirthDate, etFirstName, etMiddleName, etLastName, etEmail, etPassword;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    // Variables para guardar imagenes
+    private final String ROOT_DIR = "AppTuristaGT/";
+    private final String IMAGE_DIR = ROOT_DIR + "Galery";
+    private String path = "";
+    ImageView imagenVista;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -39,15 +56,9 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro);
 
-        etBirthDate = (EditText) this.findViewById(R.id.birthDate);
-        etBirthDate.setOnClickListener(this);
-
-        etFirstName = (EditText) this.findViewById(R.id.firstName);
-        etMiddleName = (EditText) this.findViewById(R.id.middleName);
-        etLastName = (EditText) this.findViewById(R.id.lastName);
-        etEmail = (EditText) this.findViewById(R.id.userName);
-        etPassword = (EditText) this.findViewById(R.id.new_password);
         inittialiceDatabase();
+
+        imagenVista = (AppCompatImageView) findViewById(R.id.img_preview);
 
     }
 
@@ -64,7 +75,7 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 final String selectedDate = day + "/" + (month+1) + "/" + year;
                 System.out.println(selectedDate.toString());
-                etBirthDate.setText(selectedDate.toString());
+                // etBirthDate.setText(selectedDate.toString());
             }
         });
         newFragment.show(this.getSupportFragmentManager(), "datePicker");
@@ -72,86 +83,80 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.birthDate:
-                showDatePickerDialog();
-                break;
-        }
-    }
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
 
-    private Usuario createNewUser(){
-        Usuario nuevoUsuario = new Usuario();
-        nuevoUsuario.setUid(UUID.randomUUID().toString());
-        nuevoUsuario.setEmail(etEmail.getText().toString());
-        nuevoUsuario.setFirstName(etFirstName.getText().toString());
-        nuevoUsuario.setMiddleName(etMiddleName.getText().toString());
-        nuevoUsuario.setLastName(etLastName.getText().toString());
-        nuevoUsuario.setBirthDate(etBirthDate.getText().toString());
-        nuevoUsuario.setPassword(etPassword.getText().toString());
-        return nuevoUsuario;
+            // rESULT DE LA CAMARA
+            MediaScannerConnection.scanFile(this, new String[] {path}, null, new MediaScannerConnection.OnScanCompletedListener(){
+
+                @Override
+                public void onScanCompleted(String s, Uri uri) {
+                    Log.i("Ruta de almacenamiento", "Path: " + path);
+                }
+            });
+
+            Bitmap bitMap = BitmapFactory.decodeFile(path);
+
+        }
     }
 
     private void cleanField() {
-        etBirthDate.setText("");
-        etFirstName.setText("");
-        etMiddleName.setText("");
-        etLastName.setText("");
-        etPassword.setText("");
-        etEmail.setText("");
     }
 
-    private boolean validateField(){
-        String firstName = etFirstName.getText().toString();
-        String midleName = etMiddleName.getText().toString();
-        String lastName = etLastName.getText().toString();
-        String birthDate = etBirthDate.getText().toString();
-        String password = etPassword.getText().toString();
-        String email = etEmail.getText().toString();
-
-        int errors = 0;
-        if (firstName.equals("")) {
-            etFirstName.setError("Campo requerido");
-            errors++;
-        }
-        if (midleName.equals("")) {
-            etMiddleName.setError("Campo requerido");
-            errors++;
-        }
-        if (lastName.equals("")) {
-            etLastName.setError("Campo requerido");
-            errors++;
+    public void openCamera(View view) {
+        File fileImagen = new File(Environment.getExternalStorageDirectory(), IMAGE_DIR);
+        boolean isCreated = fileImagen.exists();
+        String imageName = "";
+        if (!isCreated) {
+            isCreated = fileImagen.mkdirs();
+        } else {
+            imageName = (System.currentTimeMillis()/1000) + ".jpg";
         }
 
-        if (birthDate.equals("")) {
-            etBirthDate.setError("Campo requerido");
-            errors++;
-        }
+        path = Environment.getExternalStorageDirectory() + File.separator +
+                IMAGE_DIR + File.separator + imageName;
 
-        if (password.equals("")){
-            etPassword.setError("Campo requerido");
-            errors++;
-        }
+        File imageFile = new File(path);
 
-        if (email.equals("")){
-            etEmail.setError("Campo requerido");
-            errors++;
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile((imageFile)));
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
         }
-        return (errors == 0);
     }
 
-    public void crearUsuario(View view) {
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
-        if (validateField()){
-            // Agregar los datos
-            if (validateField()){
-                // Agregar los datos
-                Usuario nuevoUsuario = createNewUser();
-                databaseReference.child("User").child(nuevoUsuario.getUid()).setValue(nuevoUsuario);
-                cleanField();
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-            }
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+
+
+    @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+
+        switch (requestCode){
+            case REQUEST_IMAGE_CAPTURE:
+                MediaScannerConnection.scanFile(this, new String[]{path}, null,
+                        new MediaScannerConnection.OnScanCompletedListener() {
+
+                    @Override
+                    public void onScanCompleted(String s, Uri uri) {
+
+                    }
+
+                });
+
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                imagenVista.setImageBitmap(bitmap);
+                break;
         }
     }
 }
